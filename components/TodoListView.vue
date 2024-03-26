@@ -193,3 +193,21 @@
     color: red;
   }
 </style>
+
+<style scoped>
+  div{
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 2px;
+  }
+  table{    
+    margin: 0 auto;
+  }
+  th{
+    margin: 2px 8px;
+  }
+  td{
+    padding: 2px 8px;
+  }
+</style>

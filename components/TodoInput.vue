@@ -48,3 +48,14 @@
   }
 // })
 </script>
+
+<style scoped>
+  div{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2px;
+  }
+  label{
+    margin: 0 2px;
+  }
+</style>
