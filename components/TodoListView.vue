@@ -6,7 +6,7 @@
     <!-- モーダル -->
     <div v-if="isShowModal" class="modal">
       <div class="modal-content">
-        <p>{{ deleteItemContent }}を削除してもよろしいですか？</p>
+        <p>「{{ deleteItemContent }}」を削除してもよろしいですか？</p>
         <button @click="onDeleteItem()">はい</button>
         <button @click="onHideModal()">キャンセル</button>
       </div>
@@ -192,9 +192,6 @@
   .red{
     color: red;
   }
-</style>
-
-<style scoped>
   div{
     border: 1px solid black;
     border-radius: 4px;
