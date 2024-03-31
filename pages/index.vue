@@ -10,7 +10,7 @@ import TodoListView from '../components/TodoListView.vue';
     <client-only>
       <TodoInput />
       <TodoListView />
-    </client-only>    
+    </client-only> 
   </div> 
   </section>   
 </template>
