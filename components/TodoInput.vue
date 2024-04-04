@@ -4,6 +4,7 @@
     <form @submit="onSubmitForm">
       <label>やること<input type="text" v-model="input"/></label>
       <label>期限<input type="date" v-model="inputDate"/></label>
+      <label>タグ<input type="text" v-model="inputTag"></label>
       <input type="submit" value="登録！"/>
     </form>
   </div>
@@ -17,11 +18,12 @@
   // onMounted(() => {
   const input = ref("");
   const inputDate = ref("");
+  const inputTag = ref("");
   const isErrMsg = ref(false);
 
   //「登録！」時の操作
   function onSubmitForm(){
-    if(input.value == "" || inputDate.value == ""){
+    if(input.value == "" || inputDate.value == "" || inputTag == ""){
       isErrMsg.value=true;
       event.preventDefault();
       return;
@@ -35,6 +37,7 @@
       content: input.value,
       limit: inputDate.value,
       state: statuses.NOT_START,
+      tag: inputTag.value,
       onEdit: false,
     };
 

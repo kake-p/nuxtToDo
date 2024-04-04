@@ -27,6 +27,7 @@
         <th class="th-value">やること</th>
         <th class="th-limit">期限</th>
         <th class="th-state">状態</th>
+        <th class="th-tag">タグ</th>
         <th class="th-edit">編集</th>
         <th class="th-delete">削除</th>
       </tr>
@@ -35,8 +36,8 @@
       <tr v-for="item in items" :key="item.id" :class="{red: new Date(item.limit) < today}">
         <td>{{ item.id }}</td>
         <td>
-          <span v-if="!item.onEdit">{{ item.content }}</span><!--onEditがtrueの時内容を表示-->
-          <input v-else v-model="inputContent" type="text"/><!--onEditがfalseの時空欄を表示-->
+          <span v-if="!item.onEdit">{{ item.content }}</span><!--onEditがfalseの時内容を表示-->
+          <input v-else v-model="inputContent" type="text"/><!--onEditがtrueの時空欄を表示-->
         </td>
         <td>
           <span v-if="!item.onEdit">{{ item.limit }}</span>
@@ -52,6 +53,10 @@
               {{ state.value }}
             </option>
           </select>
+        </td>
+        <td>
+          <span v-if="!item.onEdit">{{ item.tag }}</span>
+          <input v-else v-model="inputTag" type="text">
         </td>
         <td>
           <button v-if="!item.onEdit" @click="onEdit(item.id)">編集</button>
@@ -73,6 +78,7 @@
   let inputContent = ref();//タスク内容
   let inputLimit = ref();//タスク期限
   let inputState = ref();//タスクステータス
+  let inputTag = ref();
   let isShowModal = ref(false);
   let deleteItemId = "";
   let deleteItemContent = ref();
@@ -101,12 +107,13 @@
     inputContent.value = items.value[id].content;
     inputLimit.value = items.value[id].limit;
     inputState.value = items.value[id].state;
+    inputTag.value = items.value[id].tag;
     items.value[id].onEdit = true;
   }
 
   //上書き保存
   function onUpdate(id){
-    if(inputContent.value == "" || inputLimit.value == ""){
+    if(inputContent.value == "" || inputLimit.value == "" || inputTag.value == ""){
       errMsg.value = "タスクの内容と期限を入力してください。";
       isErrMsg.value = true;
       return;
@@ -117,6 +124,7 @@
       content: inputContent.value,
       limit: inputLimit.value,
       state: inputState.value,
+      tag: inputTag.value,
       onEdit: false,
     };
 
@@ -143,6 +151,7 @@
       content: item.content,
       limit: item.limit,
       state: item.state,
+      tag: item.tag,
       onEdit: item.onEdit,
     }));
 
