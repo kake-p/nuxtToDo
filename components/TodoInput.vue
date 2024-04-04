@@ -11,7 +11,7 @@
 
 <script setup>
   import { ref } from "vue";
-  import { statuses } from "~/public/statuses";
+  // import { statuses } from "~/public/statuses";
   // import { onMounted } from "vue";
 
   // onMounted(() => {
@@ -34,7 +34,7 @@
       id: items.length,
       content: input.value,
       limit: inputDate.value,
-      state: statuses.NOT_START,
+      // state: statuses.NOT_START,
       onEdit: false,
     };
 

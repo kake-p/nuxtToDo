@@ -15,16 +15,18 @@
     <table>
       <!-- 表頭 -->
       <tr>
+        <th></th>
         <th class="th-id">ID<button @click="sortById()">↓</button></th>
         <th class="th-value">やること</th>
         <th class="th-limit">期限<button @click="sortByLimit()">↓</button></th>
-        <th class="th-state">状態</th>
+        <!-- <th class="th-state">状態</th> -->
         <th class="th-edit">編集</th>
         <th class="th-delete">削除</th>
       </tr>
 
       <!-- 表 -->
       <tr v-for="item in items" :key="item.id" :class="{red: new Date(item.limit) < today}">
+        <td class="checkbox"><label class="check"><input type="checkbox"></label></td>
         <td>{{ item.id }}</td>
         <td>
           <span v-if="!item.onEdit">{{ item.content }}</span><!--onEditがtrueの時内容を表示-->
@@ -32,9 +34,9 @@
         </td>
         <td>
           <span v-if="!item.onEdit">{{ item.limit }}</span>
-          <input v-else v-model="inputLimit" t type="date"/>
+          <input v-else v-model="inputLimit"  type="date"/>
         </td>
-        <td>
+        <!-- <td>
           <span v-if="!item.onEdit">{{ item.state.value }}</span>
           <select v-else v-model="inputState">
             <option v-for = "state in statuses"
@@ -44,7 +46,7 @@
               {{ state.value }}
             </option>
           </select>
-        </td>
+        </td> -->
         <td>
           <button v-if="!item.onEdit" @click="onEdit(item.id)">編集</button>
           <button v-else @click="onUpdate(item.id)">完了</button>
@@ -59,7 +61,7 @@
 
 <script setup>
   import { ref } from "vue";
-  import { statuses } from "~/public/statuses";
+  // import { statuses } from "~/public/statuses";
   
   let items = ref(JSON.parse(localStorage.getItem("items")) || []);
   let inputContent = ref();//タスク内容
@@ -92,7 +94,7 @@
 
     inputContent.value = items.value[id].content;
     inputLimit.value = items.value[id].limit;
-    inputState.value = items.value[id].state;
+    // inputState.value = items.value[id].state;
     items.value[id].onEdit = true;
   }
 
@@ -108,7 +110,7 @@
       id: id,
       content: inputContent.value,
       limit: inputLimit.value,
-      state: inputState.value,
+      // state: inputState.value,
       onEdit: false,
     };
 
@@ -134,7 +136,7 @@
       id: index,
       content: item.content,
       limit: item.limit,
-      state: item.state,
+      // state: item.state,
       onEdit: item.onEdit,
     }));
 
@@ -206,5 +208,21 @@
   }
   td{
     padding: 2px 8px;
+  }
+  input[type=checkbox]{
+    content: "";
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+  }
+  .check{
+    display: inline-block;
+    width:29px;
+    height:30px;
+  }
+  .checkbox{
+    padding: 0;
   }
 </style>
