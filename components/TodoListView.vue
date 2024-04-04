@@ -12,14 +12,21 @@
       </div>
     </div>
 
+    <!-- ソート -->
+    <div class="sorting">
+      sort:
+        <button @click="sortById()">ID</button>
+        |
+        <button @click="sortByLimit()">期限</button>
+    </div>
+
     <table>
       <!-- 表頭 -->
       <tr>
         <th></th>
-        <th class="th-id">ID<button @click="sortById()">↓</button></th>
+        <th class="th-id">ID</th>
         <th class="th-value">やること</th>
-        <th class="th-limit">期限<button @click="sortByLimit()">↓</button></th>
-        <!-- <th class="th-state">状態</th> -->
+        <th class="th-limit">期限</th>
         <th class="th-edit">編集</th>
         <th class="th-delete">削除</th>
       </tr>
@@ -194,8 +201,28 @@
   .red{
     color: red;
   }
+
+  .sorting{
+    background: white;
+    box-shadow: 0 0 4px #000;
+    border-radius: 16px;
+    width: fit-content;
+    padding: 0 8px 3px 8px;
+  }
+
+  .sorting button{
+    padding: 0;
+    all: unset;
+    cursor: pointer;
+  }
+
+  .sorting button:hover{
+    box-shadow: 0 0 4px 0 #000;
+    background-color: #eee;
+
+  }
+
   div{
-    border: 1px solid black;
     border-radius: 4px;
     margin-top: 8px;
     padding: 2px;
